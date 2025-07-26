@@ -1,0 +1,48 @@
+
+
+# 1. Import Libraries
+import requests
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 2. Configuration
+API_KEY = "1d43d93769acab0a8499adb3b0eb10fb"
+cities = ['Pune', 'Delhi', 'Mumbai', 'Bangalore']
+
+# 3. Function to fetch weather data
+def get_weather_data(city, api_key):
+    url = f"http://api.openweathermap.org/data/2.5/weather?q=pune&appid=1d43d93769acab0a8499adb3b0eb10fb&units=metric"
+    response = requests.get(url)
+    data = response.json()
+    return {
+        'City': city,
+        'Temperature': data['main']['temp'],
+        'Humidity': data['main']['humidity'],
+        'Pressure': data['main']['pressure']
+    }
+
+# 4. Fetch data for all cities
+weather_list = [get_weather_data(city, API_KEY) for city in cities]
+
+# 5. Create DataFrame
+df = pd.DataFrame(weather_list)
+print(df)
+
+# 6. Plot Temperature
+sns.barplot(x='City', y='Temperature', data=df)
+plt.title('Temperature in Different Cities')
+plt.ylabel('Temperature (°C)')
+plt.show()
+
+# 7. Plot Humidity
+sns.barplot(x='City', y='Humidity', data=df)
+plt.title('Humidity in Different Cities')
+plt.ylabel('Humidity (%)')
+plt.show()
+
+# 8. Plot Pressure
+sns.barplot(x='City', y='Pressure', data=df)
+plt.title('Pressure in Different Cities')
+plt.ylabel('Pressure (hPa)')
+plt.show()
