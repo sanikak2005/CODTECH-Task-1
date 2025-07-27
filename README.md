@@ -1,1 +1,6 @@
 # CODTECH-Task-1
+sanika umesh kadam
+ID-CT06DZ1564
+PYTHON PROGRAMMING
+25 JULY TO 10 SEPT.
+Discription-
